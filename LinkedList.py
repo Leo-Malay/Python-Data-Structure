@@ -23,7 +23,6 @@ class SingleLinkedList:
     def __init__(self):
         self.head = SNode()
         self.length = 0
-        self.tempNode = -1
 
     def getHead(self):
         return self.head
@@ -34,6 +33,13 @@ class SingleLinkedList:
     def isEmpty(self):
         head = self.getHead()
         return head.next == None
+
+    def create(self, arr: list) -> None:
+        self.head = SNode()
+        head = self.getHead()
+        for ele in arr:
+            head.next = SNode(ele)
+            head = head.next
 
     def indexOfNode(self, data: any = None) -> int:
         if self.isEmpty():
@@ -63,6 +69,23 @@ class SingleLinkedList:
             head = head.next
         head.next = SNode(data)
         self.length += 1
+
+    def insertSortedNode(self, data: any = None) -> None:
+        newNode = SNode(data)
+        self.length += 1
+        head = self.getHead()
+        if head.next == None:
+            head.next = newNode
+        else:
+            temp = head.next
+            while data > temp.data:
+                temp = temp.next
+                head = head.next
+                if temp == None:
+                    head.next = newNode
+                    return
+            head.next = newNode
+            newNode.next = temp
 
     def updateNode(self, index: int = -1, data: any = None) -> None:
         if index > self.length or index == -1:
@@ -126,6 +149,15 @@ class DoubleLinkedList:
     def isEmpty(self):
         head = self.getHead()
         return head.next == None and head.prev == None
+
+    def create(self, arr: list) -> None:
+        self.head = DNode()
+        head = self.getHead()
+        for ele in arr:
+            newNode = DNode(ele)
+            head.next = newNode
+            newNode.prev = head
+            head = head.next
 
     def indexOfNode(self, data: any = None) -> int:
         if self.isEmpty():

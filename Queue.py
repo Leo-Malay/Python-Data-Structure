@@ -24,6 +24,14 @@ class Queue:
         self.front = Node()
         self.back = self.front
 
+    def create(self, arr: list) -> None:
+        self.front = Node()
+        self.back = self.front
+        for ele in arr:
+            newNode = Node(ele)
+            self.back.next = newNode
+            self.back = self.back.next
+
     def insertNode(self, data: any = None) -> None:
         newNode = Node(data)
         self.back.next = newNode
@@ -37,6 +45,10 @@ class Queue:
 
     def listNode(self) -> list:
         temp = self.front
+        try:
+            temp = temp.next
+        except:
+            return []
         res = []
         while temp.next != None:
             res.append(temp.data)
@@ -49,6 +61,14 @@ class DeQueue:
     def __init__(self):
         self.front = Node()
         self.back = self.front
+
+    def create(self, arr: list) -> None:
+        self.front = Node()
+        self.back = self.front
+        for ele in arr:
+            newNode = Node(ele)
+            self.back.next = newNode
+            self.back = self.back.next
 
     def insertNodeFront(self, data: any = None) -> None:
         newNode = Node(data)
