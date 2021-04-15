@@ -20,22 +20,25 @@ class Tree:
     def getRoot(self):
         return self.root
 
+    def create(self, arr: list) -> None:
+        self.root = Node(arr[0])
+        for ele in arr[1:]:
+            self.insertNode(ele)
+
     def insertNode(self, data: any = None):
         newNode = Node(data)
         root = self.getRoot()
         while root != None:
             if data >= root.data:
-                if root.right != None:
-                    root = root.right
-                else:
+                if root.right == None:
                     root.right = newNode
                     break
-            elif data < root.data:
-                if root.left != None:
-                    root = root.left
-                else:
+                root = root.right
+            else:
+                if root.left == None:
                     root.left = newNode
                     break
+                root = root.left
 
     def inOrderNode(self) -> list:
         res = []
